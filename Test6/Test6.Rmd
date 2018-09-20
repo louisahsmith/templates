@@ -1,0 +1,13 @@
+---
+name: Louisa Smith
+title: "Homework # 1"
+subtitle: "RMD 101"
+institution: "Harvard"
+date: '`r format(Sys.Date(), "%B %d, %Y")`'
+output: templates::slides
+---
+
+# This is a section
+
+## This is a slide
+This is writing on the slide

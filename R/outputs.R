@@ -17,7 +17,7 @@ homework <- function(...) {
 slides <- function(handout = FALSE, ...) {
     pdf_document_format(...,
                         format = "slides",
-                        template = "slides.tex",
+                        template = "slides3.tex",
                         metadata = NULL)
 
   # if(!type %in% c("pdf")) stop("Other formats not yet supported")

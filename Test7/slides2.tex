@@ -1,0 +1,221 @@
+% !TeX program = XeLaTeX
+
+% run this before compiling if glossary not showing up/complete:
+% makeindex -s probstat_slides.ist -o probstat_slides.gls probstat_slides.glo
+
+\documentclass[$if(handout)$handout,$endif$, 13.5pt]{beamer}
+
+% \mode<presentation>
+
+% removing navigation symbols
+\setbeamertemplate{navigation symbols}{}
+
+\usepackage{xcolor}
+\usepackage{fontspec}
+\usepackage{setspace}
+\usepackage{tikz}
+\usepackage{enumitem}
+\usepackage{unicode-math}
+\usepackage{textpos}
+\setlength{\TPHorizModule}{1cm}
+\setlength{\TPVertModule}{1cm}
+
+\newcommand\crule[1][black]{\textcolor{#1}{\rule{2cm}{2cm}}}
+
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{underscore}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{nicefrac}
+\usepackage{bm}
+\usepackage{hyperref}
+\hypersetup{colorlinks,linkcolor=,urlcolor=colororange}
+
+\usepackage{pgf}
+\usetikzlibrary{positioning}
+\usetikzlibrary{shapes}
+\usetikzlibrary{arrows.meta}
+\usepackage{tkz-tab}
+\usepackage[labelformat=simple]{subcaption}
+\renewcommand\thesubfigure{(\alph{subfigure})}
+% % colors
+% \definecolor{colororange}{HTML}{E65100} % orange
+% \definecolor{colordgray}{HTML}{909090} % dark gray for note
+% \definecolor{colorhgray}{HTML}{373737} % heavy dark gray for normal text
+% \definecolor{colorgreen}{HTML}{009688} % green
+% \definecolor{colorlgray}{HTML}{FAFAFA} % background light gray
+% \definecolor{colorblue}{HTML}{0277BB} % blue
+
+% chan colors
+\definecolor{colororange}{HTML}{DC5540} % warm red
+\definecolor{colordgray}{HTML}{909090} % dark gray for note
+\definecolor{colorhgray}{HTML}{595859} % heavy dark gray for normal text
+\definecolor{colorgreen}{HTML}{65A582} % mint
+\definecolor{colorlgray}{HTML}{F0F0F2} % background light gray
+\definecolor{colorblue}{HTML}{4863AD} % blue sky
+
+% font sizes
+\newcommand{\fontsizeone}{2.292em}
+\newcommand{\fontsizetwo}{1.217em}
+\newcommand{\fontsizethree}{0.875em}
+% line spaces
+\newcommand{\linespaceone}{1.25}
+
+% font families
+\newfontfamily{\montserratfont}[Path=fonts/,BoldFont=Montserrat-Bold]{Montserrat-Regular}
+\newfontfamily{\notosansfont}[Path=fonts/,BoldFont=NotoSans-Bold,ItalicFont=NotoSans-Italic,BoldItalicFont=NotoSans-BoldItalic,SmallCapsFont=AlegreyaSansSC-Regular]{NotoSans-Regular}
+\newfontfamily{\latolightfont}[Path=fonts/]{Lato-Lig}
+\newfontfamily{\inconsolatafont}[Path=fonts/]{Inconsolata}
+
+% beamer template changes
+\setbeamertemplate{frametitle}{
+ \vspace{0.40em}
+ \noindent
+ \hspace{-1.22em}
+ \tikz[overlay,remember picture,baseline=0.3em]{\fill[fill=colorblue]  (-0.3,0.05) rectangle (0,0.9); }\latolightfont\color{colorblue}~~\insertframetitle%
+}
+
+\setmainfont[Ligatures=TeX,Path=fonts/,BoldFont=NotoSans-Bold,ItalicFont=NotoSans-Italic,BoldItalicFont=NotoSans-BoldItalic,SmallCapsFont=AlegreyaSansSC-Regular]{NotoSans-Regular}
+\setsansfont[Ligatures=TeX,Path=fonts/,BoldFont=NotoSans-Bold,ItalicFont=NotoSans-Italic,BoldItalicFont=NotoSans-BoldItalic,SmallCapsFont=AlegreyaSansSC-Regular]{NotoSans-Regular}
+\setmonofont[Ligatures=TeX,Path=fonts/,SmallCapsFont=AlegreyaSansSC-Regular]{Inconsolata}
+
+% frame counter
+\newcounter{totalfr}
+\newcounter{pageval}
+\setcounter{pageval}{\insertframenumber}
+\setbeamertemplate{footline}{
+ \ifnum\inserttotalframenumber=0
+   \setcounter{totalfr}{1}
+ \else
+    \setcounter{totalfr}{\inserttotalframenumber}
+ \fi
+ \hfill{
+   \tikz{
+     \filldraw[fill=colorblue!40, draw=colorblue!50]  (0,0) -- (0.2,0) arc (0:{(\value{framenumber})*(360/(\value{totalfr}))}:0.2) -- (0,0);
+     \node at (0,0) {\normalsize \color{colororange}\tiny{\insertframenumber}};
+   }
+ }
+ \hspace{2em}
+ \vspace*{1em}
+}
+
+% custom commands
+\newcommand{\hugetext}[1]{
+ {
+ \begin{spacing}{\linespaceone}
+  \fontsize{\fontsizeone}{\fontsizeone}{\montserratfont #1}
+ \end{spacing}
+ }
+}
+
+\newcommand{\largetext}[1]{
+ {
+ \begin{spacing}{\linespaceone}
+{\fontsize{\fontsizetwo}{\fontsizeone}\selectfont{#1}}
+  \end{spacing}
+ }
+}
+
+\newcommand{\setnote}[1]{
+ {\fontsize{\fontsizethree}{\fontsizeone}\selectfont\color{colordgray}{#1}}
+}
+
+\newcommand{\framecard}[2][colorgreen]{
+ {\setbeamercolor{background canvas}{bg=#1}
+   \begin{frame}[plain]
+   \vfill
+   \begin{center}
+    {#2}
+   \end{center}
+   \vfill
+   \end{frame}
+ }
+}
+
+\newenvironment{baseitemize}
+ {\itemize[leftmargin=15pt]}
+ {\enditemize}
+
+\newenvironment{fullpageitemize}
+ {\itemize[nolistsep,itemsep=\fill,leftmargin=*]}
+ {\vfill\enditemize}
+
+\usefonttheme[onlymath]{serif}
+\setbeamercolor{section in toc}{fg=colorgreen}
+\setbeamercolor{subsection in toc}{fg=colordgray}
+\setbeamercolor{subsection in toc}{fg=colordgray}
+
+\setbeamercolor{caption text}{fg=colordgray}
+\setbeamercolor{caption name}{fg=colororange}
+
+\setbeamercolor{bibliography entry author}{fg=colorgreen}
+\setbeamercolor{bibliography entry title}{fg=colorhgray}
+\setbeamercolor{bibliography entry note}{fg=colorhgray}
+\setbeamercolor{bibliography entry journal}{fg=colorhgray}
+\setbeamercolor{bibliography entry booktitle}{fg=colorhgray}
+\setbeamercolor{bibliography entry location}{fg=colorhgray}
+\setbeamertemplate{bibliography item}[triangle]
+\setbeamercolor{bibliography item}{fg=colororange}
+
+%\captionsetup{textfont=colordgray,labelfont=colororange}
+\setbeamertemplate{frametitle continuation}{}
+
+\newcommand{\E}{{\operatorname E}}
+\newcommand{\Var}{{\operatorname {Var}}}
+\newcommand{\Cov}{{\operatorname {Cov}}}
+
+\newcommand{\myTitle}{\color{colorblue}\hugetext{$if(title)$$title$$endif$}}
+\newcommand{\mySubtitle}{\color{colorblue}\montserratfont\largetext{$if(subtitle)$$subtitle$$endif$}}
+\newcommand{\myName}{\largetext{\color{colororange}{$if(name)$$name$$endif$}}}
+\newcommand{\myInstitution}{\setnote{\textcolor{colororange}{$if(institution)$$institution$$endif$}}}
+\newcommand{\myDate}{\setnote{\textcolor{colorgreen}{$if(date)$$date$$endif$}}}
+
+\begin{document}
+$if(title)$
+\begin{frame}[plain]
+  \vfill
+    \myTitle
+    \mySubtitle
+    \vfill
+    \myName
+    \myInstitution
+     \vfill
+    \myDate
+    \vfill
+\addtocounter{framenumber}{-1}
+\addtocounter{page}{-1}
+\end{frame}
+$endif$
+
+$for(include-before)$
+$include-before$
+$endfor$
+$if(toc)$
+
+\begin{frame}
+\tableofcontents[hideallsubsections]
+\end{frame}
+
+$endif$
+$body$
+
+$if(bibliography)$
+\begin{frame}[plain, allowframebreaks]{References}
+$if(bibstyle)$
+\bibliographystyle{$bibstyle$}
+$endif$
+\bibliography{$for(bibliography)$$bibliography$$sep$,$endfor$}
+$if(bibpages)$
+\addtocounter{framenumber}{$bibpages$}
+\addtocounter{page}{$bibpages$}
+$endif$
+
+\end{frame}
+$endif$
+
+
+\end{document}
