@@ -3,5 +3,5 @@ name: Louisa Smith
 title: "Homework # 1"
 class: "RMD 101"
 date: '`r format(Sys.Date(), "%B %d, %Y")`'
-output: epitemplates::homework
+output: templates::homework
 ---

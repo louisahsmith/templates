@@ -6,3 +6,7 @@ institution: "Harvard"
 date: '`r format(Sys.Date(), "%B %d, %Y")`'
 output: templates::slides
 ---
+
+\begin{frame}[test]
+This is a test of my slides!
+\end{frame}
