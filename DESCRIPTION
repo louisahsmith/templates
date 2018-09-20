@@ -1,0 +1,10 @@
+Package: templates
+Type: Package
+Title: Helpful Templates for Customizing R Markdown Files
+Version: 0.1.0
+Author: Louisa H. Smith
+Maintainer: Louisa H. Smith <louisahsmith@gmail.com>
+Description: This package contains templates for use with R Markdown.
+License: MIT
+Encoding: UTF-8
+LazyData: true
