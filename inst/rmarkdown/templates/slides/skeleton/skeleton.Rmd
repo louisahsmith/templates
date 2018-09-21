@@ -1,8 +1,9 @@
 ---
 name: Louisa Smith
-title: "Homework # 1"
-subtitle: "RMD 101"
+title: "Presentation"
+subtitle: "Subtitle"
 institution: "Harvard"
 date: '`r format(Sys.Date(), "%B %d, %Y")`'
+bibpages: 1
 output: templates::slides
 ---

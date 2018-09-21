@@ -17,7 +17,7 @@ homework <- function(..., metadata = NULL) {
 slides <- function(..., metadata = NULL) {
   beamer_presentation_format(...,
                         format = "slides",
-                        template = "slides3.tex",
+                        template = "slides.tex",
                         metadata = metadata,
                         latex_engine = "xelatex",
                         citation_package = "biblatex")
