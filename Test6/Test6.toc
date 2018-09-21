@@ -1,2 +1,0 @@
-\beamer@sectionintoc {1}{This is a section}{1}{0}{1}
-\beamer@subsectionintoc {1}{1}{This is a slide}{1}{0}{1}

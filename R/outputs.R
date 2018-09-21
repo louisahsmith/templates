@@ -1,9 +1,9 @@
-homework <- function(...) {
+homework <- function(..., metadata = NULL) {
   #if(type == "pdf"){
     pdf_document_format(...,
                         format = "homework",
                         template = "homework.tex",
-                        metadata = NULL)
+                        metadata = metadata)
   # }
   # if(type == "word"){
   #   word_document_format(...,
@@ -14,12 +14,13 @@ homework <- function(...) {
   # if(!type %in% c("pdf", "word")) stop("Other formats not yet supported")
 }
 
-slides <- function(handout = FALSE, ...) {
-    pdf_document_format(...,
+slides <- function(..., metadata = NULL) {
+  beamer_presentation_format(...,
                         format = "slides",
                         template = "slides3.tex",
-                        metadata = NULL)
+                        metadata = metadata,
+                        latex_engine = "xelatex",
+                        citation_package = "biblatex")
 
   # if(!type %in% c("pdf")) stop("Other formats not yet supported")
 }
-

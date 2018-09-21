@@ -12,6 +12,13 @@ inherit_word_document <- function(...) {
   fmt
 }
 
+# Call rmarkdown::beamer_presentation and mark the return value as inheriting beamer_presentation
+inherit_beamer_presentation <- function(...) {
+  fmt <- rmarkdown::beamer_presentation(...)
+  fmt$inherits <- "beamer_presentation"
+  fmt
+}
+
 find_file <- function(template, file) {
   template <- system.file("rmarkdown", "templates", template, file,
                           package = "templates")
@@ -85,6 +92,31 @@ word_document_format <- function(..., format, template = "default", metadata = N
                        "--filter",
                        "/usr/local/bin/pandoc-crossref")
 
+  # return format
+  fmt
+}
+
+# Helper function to create a custom format derived from pdf_document
+# that includes a custom LaTeX template and YAML metadata
+beamer_presentation_format <- function(..., format, template = "default", metadata = NULL) {
+
+  # base format
+  fmt <- inherit_beamer_presentation(..., template = find_resource(format, template))
+
+  if (!is.null(metadata)) {
+    fmt$pandoc$args <- c(fmt$pandoc$args,
+                         "--metadata-file",
+                         rmarkdown::pandoc_path_arg(find_resource(format, metadata)))
+  }
+
+  fmt$pandoc$args <- c(fmt$pandoc$args,
+                       "--bibliography",
+                       rmarkdown::pandoc_path_arg(system.file("rmarkdown/resources/library.bib", package = "templates")))
+
+  #
+  # fmt$pandoc$args <- c(fmt$pandoc$args,
+  #                      "--citation-abbreviations",
+  #                      rmarkdown::pandoc_path_arg(system.file("rmarkdown/resources/abbreviations.json", package = "templates")))
   # return format
   fmt
 }

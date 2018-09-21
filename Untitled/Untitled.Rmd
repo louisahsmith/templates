@@ -1,0 +1,16 @@
+---
+name: Louisa Smith
+title: "Homework # 1"
+subtitle: "RMD 101"
+institution: "Harvard"
+date: '`r format(Sys.Date(), "%B %d, %Y")`'
+output: templates::slides
+bibpages: 1
+---
+# Hi
+
+I really should go to bed
+
+# OK
+
+You should [@Hernan2004]
