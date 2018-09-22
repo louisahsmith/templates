@@ -3,7 +3,7 @@
 % run this before compiling if glossary not showing up/complete:
 % makeindex -s probstat_slides.ist -o probstat_slides.gls probstat_slides.glo
 
-\documentclass[$if(handout)$handout,$endif$ 13.5pt]{beamer}
+\documentclass[$if(handout)$handout,$endif$$if(widescreen)$aspectratio = 169,$endif$  13.5pt]{beamer}
 
 \input{config/presento.sty}
 
@@ -33,7 +33,7 @@
 \newif\ifbibliography
 % \usepackage{natbib}
 % \bibliographystyle{$if(biblio-style)$$biblio-style$$else$plainnat$endif$}
-\usepackage[$if(biblio-style)$bibstyle=$biblio-style$$else$bibstyle=nejm$endif$,$if(cite-style)$citestyle=$cite-style$$else$citestyle=ext-authoryear$endif$,$for(biblatexoptions)$$biblatexoptions$$sep$$endfor$,backend=bibtex, maxbibnames = 3, maxcitenames = 1, mincitenames = 1, url = false, doi = false, isbn = false]{biblatex}
+\usepackage[$if(biblio-style)$bibstyle=$biblio-style$$else$bibstyle=nejm$endif$,$if(cite-style)$citestyle=$cite-style$$else$citestyle=ext-authoryear$endif$,$for(biblatexoptions)$$biblatexoptions$$sep$$endfor$, maxbibnames = 3, maxcitenames = 1, mincitenames = 1, url = false, doi = false, isbn = false]{biblatex}
 $for(bibliography)$
 \addbibresource{$bibliography$}
 $endfor$
@@ -85,6 +85,8 @@ $endfor$
     \restorebibmacro{autocite}%
     \usebibmacro{autocite}}}
 
+\AtBeginBibliography{\footnotesize}
+
 \hypersetup{colorlinks,linkcolor=,urlcolor=colororange, citecolor = colordgray}
 
 \usefonttheme[onlymath]{serif}
@@ -104,19 +106,62 @@ $endfor$
 \setbeamertemplate{bibliography item}[triangle]
 \setbeamercolor{bibliography item}{fg=colororange}
 
+\setbeamercolor{item}{fg=colororange}
+
 %\captionsetup{textfont=colordgray,labelfont=colororange}
 \setbeamertemplate{frametitle continuation}{}
+
+\renewenvironment{block}
+    {\bfseries}
+    {\notosansfont}
+    {\color{colorhgray}}
+
+\makeatletter
+\tikzoption{base font}{\def\tikz@base@textfont{#1}}
+\tikzoption{font}{\def\tikz@textfont{\tikz@base@textfont#1}}
+\tikzset{
+      base font=\sffamily,
+      draw=colorhgray
+}
+
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd{\@listI}{\itemsep3\p@}{\itemsep3em}{}{}
+\makeatother
 
 \newcommand{\E}{{\operatorname E}}
 \newcommand{\Var}{{\operatorname {Var}}}
 \newcommand{\Cov}{{\operatorname {Cov}}}
+\newcommand{\Cor}{{\operatorname {Cor}}}
 
+\newcommand*\pr{\text{Pr}}
+
+\newcommand*\RRts{\text{RR}^{\text{true}}_{AY |(S = 1)}}
+\newcommand*\RRos{\text{RR}^{\text{obs}}_{AY}}
+
+\newcommand*\RRt{\text{RR}^{\text{true}}_{AY}}
+\newcommand*\RRo{\text{RR}^{\text{obs}}_{AY}}
+
+\newcommand*\RDts{\text{RD}^{\text{true}}_{AY |(S = 1)}}
+\newcommand*\RDos{\text{RD}^{\text{obs}}_{AY}}
+
+\newcommand*\RDt{\text{RD}^{\text{true}}_{AY}}
+\newcommand*\RDo{\text{RD}^{\text{obs}}_{AY}}
+
+\newcommand*\RRuyaa{\text{RR}_{UY |(A = 0)}}
+\newcommand*\RRuyab{\text{RR}_{UY |(A = 1)}}
+\newcommand*\RRsuaa{\text{RR}_{SU |(A = 0)}}
+\newcommand*\RRsuab{\text{RR}_{SU |(A = 1)}}
+
+\newcommand*\RRuys{\text{RR}_{UY |(S = 1)}}
+\newcommand*\RRaus{\text{RR}_{AU |(S = 1)}}
 
 \newcommand{\myTitle}{\color{colorblue}\hugetext{$if(title)$$title$$endif$}}
 \newcommand{\mySubtitle}{\color{colorblue}\montserratfont\largetext{$if(subtitle)$$subtitle$$endif$}}
 \newcommand{\myName}{\largetext{\color{colororange}{$if(name)$$name$$endif$}}}
 \newcommand{\myInstitution}{\setnote{\textcolor{colororange}{$if(institution)$$institution$$endif$}}}
 \newcommand{\myDate}{\setnote{\textcolor{colorgreen}{$if(date)$$date$$endif$}}}
+\newcommand{\myOccasion}{\setnote{\textcolor{colorgreen}{$if(occasion)$$occasion$$endif$}}}
 
 \begin{document}
 $if(title)$
@@ -129,6 +174,8 @@ $if(title)$
     \myInstitution
      \vfill
     \myDate
+    
+    \myOccasion
     \vfill
 \addtocounter{framenumber}{-1}
 \addtocounter{page}{-1}
