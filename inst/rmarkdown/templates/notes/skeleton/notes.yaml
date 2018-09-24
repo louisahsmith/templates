@@ -1,0 +1,4 @@
+author: "Louisa H. Smith"
+output:
+  templates::notes:
+    pandoc_args: ["-Fpandoc-crossref"]
