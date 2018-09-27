@@ -101,9 +101,9 @@ $endif$
 
 
 \setlength{\parindent}{0mm}
-\setlength{\parskip}{6mm}
+\setlength{\parskip}{3mm}
 
-\linespread{1.15}
+\linespread{1}
 
 %%% Use protect on footnotes to avoid problems with footnotes in titles
 \let\rmarkdownfootnote\footnote%
@@ -157,14 +157,22 @@ $endfor$
 \tikzstyle{observed} = [circle, thick, text centered, draw, minimum height=1in, minimum width=1in, text width=9em, text height = 16pt]
 \tikzstyle{end_text} = [thick, text centered]
 
+\renewcommand{\rmdefault}{\sfdefault}
+
 \setkomafont{title}{\normalfont\upshape\bfseries}
-\setkomafont{section}{\normalfont\large\upshape\bfseries}
-\setkomafont{subsection}{\normalfont\upshape\bfseries}
+% \setkomafont{section}{\normalfont\large\upshape\bfseries}
+% \setkomafont{subsection}{\normalfont\upshape\bfseries}
+
+
 % \setlength{\parskip}{0.1mm}
 \setlist[enumerate]{leftmargin=*}
 \usetikzlibrary{positioning}
 \usetikzlibrary{shapes}
 \usetikzlibrary{arrows.meta}
+
+
+\setlist[itemize]{leftmargin=*}
+
 \renewcommand\thesubfigure{(\alph{subfigure})}
 \makeatletter
 \renewcommand*\env@matrix[1][\arraystretch]{%
@@ -223,9 +231,10 @@ $endif$
 
   $if(subject)$
   \AuthFont{$subject$}
+  \vspace{2ex}
   $endif$
 \end{flushleft}
-\vspace{-6ex}
+\vspace{-4.5ex}
 \par\noindent\rule{.35\textwidth}{0.6pt}
 
 $for(include-before)$
