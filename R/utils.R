@@ -35,7 +35,7 @@ find_resource <- function(template, file) {
 
 # Helper function to create a custom format derived from pdf_document
 # that includes a custom LaTeX template and YAML metadata
-pdf_document_format <- function(..., format, template = "default", metadata = NULL) {
+pdf_document_format <- function(..., format, template = "default", metadata = NULL, bibstyle = "epidemiology", bibliography = "library_fixed") {
 
   # base format
   fmt <- inherit_pdf_document(..., template = find_resource(format, template))
@@ -48,11 +48,11 @@ pdf_document_format <- function(..., format, template = "default", metadata = NU
 
   fmt$pandoc$args <- c(fmt$pandoc$args,
                        "--bibliography",
-                       rmarkdown::pandoc_path_arg(system.file("rmarkdown/resources/library_fixed.bib", package = "templates")))
+                       rmarkdown::pandoc_path_arg(system.file(paste0("rmarkdown/resources/", bibliography, ".bib"), package = "templates")))
 
   fmt$pandoc$args <- c(fmt$pandoc$args,
                        "--csl",
-                       rmarkdown::pandoc_path_arg(system.file("rmarkdown/resources/epidemiology.csl", package = "templates")))
+                       rmarkdown::pandoc_path_arg(system.file(paste0("rmarkdown/resources/", bibstyle, ".csl"), package = "templates")))
 
   fmt$pandoc$args <- c(fmt$pandoc$args,
                        "--citation-abbreviations",
@@ -65,7 +65,7 @@ pdf_document_format <- function(..., format, template = "default", metadata = NU
   fmt
 }
 
-word_document_format <- function(..., format, template = "default", metadata = NULL) {
+word_document_format <- function(..., format, template = "default", metadata = NULL, bibstyle = "epidemiology", bibliography = "library_fixed") {
 
   # base format
   fmt <- inherit_word_document(..., reference_docx = find_resource(format, template))
@@ -78,11 +78,11 @@ word_document_format <- function(..., format, template = "default", metadata = N
 
   fmt$pandoc$args <- c(fmt$pandoc$args,
                        "--bibliography",
-                       rmarkdown::pandoc_path_arg(system.file("rmarkdown/resources/library_fixed.bib", package = "templates")))
+                       rmarkdown::pandoc_path_arg(system.file(paste0("rmarkdown/resources/", bibliography, ".bib"), package = "templates")))
 
   fmt$pandoc$args <- c(fmt$pandoc$args,
                        "--csl",
-                       rmarkdown::pandoc_path_arg(system.file("rmarkdown/resources/epidemiology.csl", package = "templates")))
+                       rmarkdown::pandoc_path_arg(system.file(paste0("rmarkdown/resources/", bibstyle, ".csl"), package = "templates")))
 
   fmt$pandoc$args <- c(fmt$pandoc$args,
                        "--citation-abbreviations",
@@ -91,6 +91,10 @@ word_document_format <- function(..., format, template = "default", metadata = N
   fmt$pandoc$args <- c(fmt$pandoc$args,
                        "--filter",
                        "/usr/local/bin/pandoc-crossref")
+
+   fmt$pandoc$args <- c(fmt$pandoc$args,
+                        "--filter",
+                        "/usr/local/bin/pandoc-word-newpage")
 
   # return format
   fmt
@@ -113,10 +117,5 @@ beamer_presentation_format <- function(..., format, template = "default", metada
                        "--bibliography",
                        rmarkdown::pandoc_path_arg(system.file("rmarkdown/resources/library.bib", package = "templates")))
 
-  #
-  # fmt$pandoc$args <- c(fmt$pandoc$args,
-  #                      "--citation-abbreviations",
-  #                      rmarkdown::pandoc_path_arg(system.file("rmarkdown/resources/abbreviations.json", package = "templates")))
-  # return format
   fmt
 }

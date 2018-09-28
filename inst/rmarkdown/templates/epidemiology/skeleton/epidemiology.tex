@@ -36,10 +36,9 @@ $endif$
 \urlstyle{same}  % don't use monospace font for urls
 $if(natbib)$
 \usepackage{natbib}
-\bibliographystyle{$if(biblio-style)$$biblio-style$$else$plainnat$endif$}
 $endif$
 $if(biblatex)$
-\usepackage$if(biblio-style)$[style=$biblio-style$]$endif${biblatex}
+\usepackage{biblatex}
 $if(biblatexoptions)$\ExecuteBibliographyOptions{$for(biblatexoptions)$$biblatexoptions$$sep$,$endfor$}$endif$
 $for(bibliography)$
 \addbibresource{$bibliography$}
@@ -159,7 +158,9 @@ $endfor$
 
 \setkomafont{title}{\normalfont\upshape\bfseries}
 \setkomafont{section}{\normalfont\large\upshape\bfseries}
-\setkomafont{subsection}{\normalfont\upshape\bfseries}
+\addtokomafont{section}{\MakeUppercase}
+\setkomafont{subsection}{\normalfont\upshape\itshape}
+\setkomafont{subsubsection}{\normalfont\upshape}
 % \setlength{\parskip}{0.1mm}
 \setlist[enumerate]{leftmargin=*}
 \usetikzlibrary{positioning}
@@ -174,6 +175,8 @@ $endfor$
   \array{*\c@MaxMatrixCols c}}
 \makeatother
 
+\renewcommand\paragraph{\newpage}
+
 \newcommand*\xtb{\mathbf{X}_i^T\bm{\beta}}
 
 \newcommand\independent{\protect\mathpalette{\protect\independenT}{\perp}}
@@ -185,6 +188,26 @@ $endfor$
 \newcommand{\Cor}{{\operatorname {Cor}}}
 
 \newcommand*\pr{\text{Pr}}
+
+\newcommand*\RRts{\text{RR}^{\text{true}}_{AY |(S = 1)}}
+\newcommand*\RRos{\text{RR}^{\text{obs}}_{AY}}
+
+\newcommand*\RRt{\text{RR}^{\text{true}}_{AY}}
+\newcommand*\RRo{\text{RR}^{\text{obs}}_{AY}}
+
+\newcommand*\RDts{\text{RD}^{\text{true}}_{AY |(S = 1)}}
+\newcommand*\RDos{\text{RD}^{\text{obs}}_{AY}}
+
+\newcommand*\RDt{\text{RD}^{\text{true}}_{AY}}
+\newcommand*\RDo{\text{RD}^{\text{obs}}_{AY}}
+
+\newcommand*\RRuyaa{\text{RR}_{UY |(A = 0)}}
+\newcommand*\RRuyab{\text{RR}_{UY |(A = 1)}}
+\newcommand*\RRsuaa{\text{RR}_{SU |(A = 0)}}
+\newcommand*\RRsuab{\text{RR}_{SU |(A = 1)}}
+
+\newcommand*\RRuys{\text{RR}_{UY |(S = 1)}}
+\newcommand*\RRaus{\text{RR}_{AU |(S = 1)}}
 
 \newcommand*{\TitleFont}{%
       % \usefont{\encodingdefault}{\rmdefault}{b}{n}%
@@ -213,26 +236,30 @@ $if(dir)$
 \fi
 $endif$
 
+\setlength{\parindent}{5mm}
+\setlength{\parskip}{6mm}
+
+\linespread{2}
+
+\usepackage{indentfirst}
+
 \begin{document}
 
 {\centering
   $if(title)$
-  \title{\vspace{-4ex} \TitleFont{$title$}}
+  \vspace{-4ex} \TitleFont{$title$}
   $endif$
-  $if(class)$
-  \subtitle{$class$\vspace{-2ex}}
+
+  $if(name)$
+  \AuthFont{$name$}\vspace{-1.5ex}
   $endif$
-  $if(date)$
-  \date{\vspace{-1.5ex} \AuthFont{$date$}\vspace{-4ex}}
-  $endif$
-  \author{\AuthFont{$name$}\vspace{-1.5ex}}
-  \maketitle
 }
 
 $if(abstract)$
 \begin{abstract}
 $abstract$
 \end{abstract}
+\newpage
 $endif$
 
 $for(include-before)$
@@ -247,6 +274,7 @@ $endif$
 \setcounter{tocdepth}{$toc-depth$}
 \tableofcontents
 }
+\newpage
 $endif$
 $if(lot)$
 \listoftables

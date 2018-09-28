@@ -40,3 +40,24 @@ slides <- function(..., metadata = NULL) {
 
   # if(!type %in% c("pdf")) stop("Other formats not yet supported")
 }
+
+
+epidemiology <- function(..., metadata = NULL, type = "pdf") {
+  if(type == "pdf"){
+    return(pdf_document_format(...,
+                        format = "epidemiology",
+                        template = "epidemiology.tex",
+                        metadata = metadata,
+                        bibstyle = "epidemiology",
+                      bibliography = "library_fixed"))
+  }
+  if(type == "word"){
+    return(word_document_format(...,
+                        format = "epidemiology",
+                        template = "epidemiology.docx",
+                        metadata = metadata,
+                        bibstyle = "epidemiology",
+                      bibliography = "library_fixed"))
+  }
+  if(!type %in% c("pdf", "word")) stop("Other formats not yet supported")
+}
