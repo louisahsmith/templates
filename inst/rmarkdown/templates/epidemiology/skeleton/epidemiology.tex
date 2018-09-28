@@ -166,7 +166,7 @@ $endfor$
 \usetikzlibrary{positioning}
 \usetikzlibrary{shapes}
 \usetikzlibrary{arrows.meta}
-\renewcommand\thesubfigure{(\alph{subfigure})}
+\newcommand\thesubfigure{(\alph{subfigure})}
 \makeatletter
 \renewcommand*\env@matrix[1][\arraystretch]{%
   \edef\arraystretch{#1}%
@@ -187,7 +187,7 @@ $endfor$
 \newcommand{\Cov}{{\operatorname {Cov}}}
 \newcommand{\Cor}{{\operatorname {Cor}}}
 
-\newcommand*\pr{\text{Pr}}
+\newcommand*\pr{\text{P}}
 
 \newcommand*\RRts{\text{RR}^{\text{true}}_{AY |(S = 1)}}
 \newcommand*\RRos{\text{RR}^{\text{obs}}_{AY}}

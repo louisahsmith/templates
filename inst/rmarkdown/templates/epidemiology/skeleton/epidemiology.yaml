@@ -1,3 +1,0 @@
-output:
-  templates::epidemiology:
-    pandoc_args: ["-Fpandoc-crossref"]
