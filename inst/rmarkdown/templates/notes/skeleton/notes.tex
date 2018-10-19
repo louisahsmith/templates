@@ -121,12 +121,12 @@ $endfor$
 \usepackage[table]{xcolor}
 \usepackage{textcomp}
 \usepackage{booktabs}
-\usepackage[margin=1in, footskip=.5in, paperwidth=8.5in,paperheight=11.0in]{geometry}
+\usepackage[margin=1in, footskip=.5in]{geometry}
 \usepackage{float}
 \usepackage{lipsum}
 \usepackage{graphicx}
 \usepackage{wrapfig}
-\usepackage{underscore}
+% \usepackage{underscore}
 \usepackage{enumitem}
 \usepackage{amsmath}
 \usepackage[colorinlistoftodos]{todonotes}
@@ -162,7 +162,8 @@ $endfor$
 \setkomafont{title}{\normalfont\upshape\bfseries}
 % \setkomafont{section}{\normalfont\large\upshape\bfseries}
 % \setkomafont{subsection}{\normalfont\upshape\bfseries}
-
+\allowdisplaybreaks
+\usepackage[all]{nowidow}
 
 % \setlength{\parskip}{0.1mm}
 \setlist[enumerate]{leftmargin=*}
@@ -184,13 +185,15 @@ $endfor$
 
 \newcommand*\xtb{\mathbf{X}_i^T\bm{\beta}}
 
-\newcommand\independent{\protect\mathpalette{\protect\independenT}{\perp}}
+
 \newcommand*{\notindep}{\not\!\perp\!\!\!\perp}
 
 \newcommand{\E}{{\operatorname E}}
 \newcommand{\Var}{{\operatorname {Var}}}
 \newcommand{\Cov}{{\operatorname {Cov}}}
 \newcommand{\Cor}{{\operatorname {Cor}}}
+
+\newcommand*{\independent}{\!\perp\!\!\!\perp}
 
 \newcommand*\pr{\text{Pr}}
 

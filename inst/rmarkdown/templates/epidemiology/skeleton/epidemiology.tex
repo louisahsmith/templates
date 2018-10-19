@@ -56,7 +56,7 @@ $if(verbatim-in-note)$
 \VerbatimFootnotes % allows verbatim text in footnotes
 $endif$
 
-$if(graphics)$
+
 \usepackage{graphicx,grffile}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
@@ -66,7 +66,7 @@ $if(graphics)$
 % margins by default, and it is still possible to overwrite the defaults
 % using explicit options in \includegraphics[width, height, ...]{}
 \setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
-$endif$
+
 $if(links-as-notes)$
 % Make links footnotes instead of hotlinks:
 \renewcommand{\href}[2]{#2\footnote{\url{#1}}}
@@ -99,11 +99,6 @@ $else$
 $endif$
 
 
-\setlength{\parindent}{0mm}
-\setlength{\parskip}{6mm}
-
-\linespread{1.15}
-
 %%% Use protect on footnotes to avoid problems with footnotes in titles
 \let\rmarkdownfootnote\footnote%
 \def\footnote{\protect\rmarkdownfootnote}
@@ -115,17 +110,16 @@ $endfor$
 % \setlength{\parskip}{1.5em}
 \usepackage [autostyle, english = american]{csquotes}
 \MakeOuterQuote{"}
-\renewcommand{\thesection}{\Roman{section}}
+\renewcommand{\thesection}{\arabic{section}}
 \renewcommand{\thesubsection}{\alph{subsection}}
 \usepackage[table]{xcolor}
 \usepackage{textcomp}
 \usepackage{booktabs}
-\usepackage[margin=1in, footskip=.5in, paperwidth=8.5in,paperheight=11.0in]{geometry}
+\usepackage[margin=$if(margin)$$margin$$else$1in$endif$, footskip=$if(footskip)$$footskip$$else$.5in$endif$]{geometry}
 \usepackage{float}
 \usepackage{lipsum}
-\usepackage{graphicx}
 \usepackage{wrapfig}
-\usepackage{underscore}
+% \usepackage{underscore}
 \usepackage{enumitem}
 \usepackage{amsmath}
 \usepackage[colorinlistoftodos]{todonotes}
@@ -155,11 +149,16 @@ $endfor$
 \usepackage{tkz-tab}
 \tikzstyle{observed} = [circle, thick, text centered, draw, minimum height=1in, minimum width=1in, text width=9em, text height = 16pt]
 \tikzstyle{end_text} = [thick, text centered]
+\usepackage{relsize}
+\usepackage{setspace}\doublespacing
+\allowdisplaybreaks
+\usepackage[all]{nowidow}
+% \renewenvironment{Shaded}{\begin{singlespace}}{\end{singlespace}}
 
 \setkomafont{title}{\normalfont\upshape\bfseries}
 \setkomafont{section}{\normalfont\large\upshape\bfseries}
 \addtokomafont{section}{\MakeUppercase}
-\setkomafont{subsection}{\normalfont\upshape\itshape}
+\setkomafont{subsection}{\normalfont\upshape\bfseries}
 \setkomafont{subsubsection}{\normalfont\upshape}
 % \setlength{\parskip}{0.1mm}
 \setlist[enumerate]{leftmargin=*}
@@ -175,11 +174,13 @@ $endfor$
   \array{*\c@MaxMatrixCols c}}
 \makeatother
 
+\newcommand*{\secref}[1]{Section~\ref{#1}}
+
 \renewcommand\paragraph{\newpage}
 
 \newcommand*\xtb{\mathbf{X}_i^T\bm{\beta}}
 
-\newcommand\independent{\protect\mathpalette{\protect\independenT}{\perp}}
+\newcommand*{\independent}{\!\perp\!\!\!\perp}
 \newcommand*{\notindep}{\not\!\perp\!\!\!\perp}
 
 \newcommand{\E}{{\operatorname E}}
@@ -237,9 +238,7 @@ $if(dir)$
 $endif$
 
 \setlength{\parindent}{5mm}
-\setlength{\parskip}{6mm}
-
-\linespread{2}
+\setlength{\parskip}{2.5mm}
 
 \usepackage{indentfirst}
 

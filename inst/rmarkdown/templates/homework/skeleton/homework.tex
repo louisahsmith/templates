@@ -1,4 +1,4 @@
-\documentclass[11pt]{scrartcl}
+\documentclass[11pt$if(landscape)$,landscape$endif$]{scrartcl}
 $if(linestretch)$
 \usepackage{setspace}
 \setstretch{$linestretch$}
@@ -121,12 +121,12 @@ $endfor$
 \usepackage[table]{xcolor}
 \usepackage{textcomp}
 \usepackage{booktabs}
-\usepackage[margin=1in, footskip=.5in, paperwidth=8.5in,paperheight=11.0in]{geometry}
+\usepackage[margin=$if(margin)$$margin$$else$1in$endif$, footskip=$if(footskip)$$footskip$$else$.5in$endif$]{geometry}
 \usepackage{float}
 \usepackage{lipsum}
 \usepackage{graphicx}
 \usepackage{wrapfig}
-\usepackage{underscore}
+% \usepackage{underscore}
 \usepackage{enumitem}
 \usepackage{amsmath}
 \usepackage[colorinlistoftodos]{todonotes}
@@ -148,6 +148,9 @@ $endfor$
 \usepackage{pdflscape}
 \usepackage[labelfont=bf]{caption}
 \usepackage{ragged2e}
+
+\allowdisplaybreaks
+\usepackage[all]{nowidow}
 % \usepackage{color, colortbl}
 \usepackage{pgf,tikz}
 \usetikzlibrary{positioning, calc, shapes.geometric, shapes.multipart,
@@ -176,13 +179,16 @@ $endfor$
 
 \newcommand*\xtb{\mathbf{X}_i^T\bm{\beta}}
 
-\newcommand\independent{\protect\mathpalette{\protect\independenT}{\perp}}
+\newcommand*{\independent}{\!\perp\!\!\!\perp}
+
 \newcommand*{\notindep}{\not\!\perp\!\!\!\perp}
 
 \newcommand{\E}{{\operatorname E}}
 \newcommand{\Var}{{\operatorname {Var}}}
 \newcommand{\Cov}{{\operatorname {Cov}}}
 \newcommand{\Cor}{{\operatorname {Cor}}}
+
+
 
 \newcommand*\pr{\text{Pr}}
 

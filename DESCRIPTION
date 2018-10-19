@@ -8,3 +8,4 @@ Description: This package contains templates for use with R Markdown.
 License: MIT
 Encoding: UTF-8
 LazyData: true
+RoxygenNote: 6.1.0
