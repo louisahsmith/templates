@@ -81,7 +81,7 @@ $endif$
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 
 $if(numbersections)$
-\setcounter{secnumdepth}{5}
+\setcounter{secnumdepth}{2}
 $else$
 \setcounter{secnumdepth}{0}
 $endif$
@@ -159,13 +159,13 @@ $endfor$
 \setkomafont{section}{\normalfont\large\upshape\bfseries}
 \addtokomafont{section}{\MakeUppercase}
 \setkomafont{subsection}{\normalfont\upshape\bfseries}
-\setkomafont{subsubsection}{\normalfont\upshape}
+\setkomafont{subsubsection}{\normalfont\upshape\itshape}
 % \setlength{\parskip}{0.1mm}
 \setlist[enumerate]{leftmargin=*}
 \usetikzlibrary{positioning}
 \usetikzlibrary{shapes}
 \usetikzlibrary{arrows.meta}
-\newcommand\thesubfigure{(\alph{subfigure})}
+\renewcommand\thesubfigure{(\alph{subfigure})}
 \makeatletter
 \renewcommand*\env@matrix[1][\arraystretch]{%
   \edef\arraystretch{#1}%
@@ -248,9 +248,11 @@ $endif$
   $if(title)$
   \vspace{-4ex} \TitleFont{$title$}
   $endif$
+}
 
+{\centering
   $if(name)$
-  \AuthFont{$name$}\vspace{-1.5ex}
+  \AuthFont{$name$}\vspace{-.5ex}
   $endif$
 }
 

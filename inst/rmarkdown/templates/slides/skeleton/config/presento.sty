@@ -36,7 +36,7 @@
 % font families
 \newfontfamily{\montserratfont}[Path=config/fonts/,BoldFont=Montserrat-Bold]{Montserrat-Regular}
 \newfontfamily{\notosansfont}[Path=config/fonts/,BoldFont=NotoSans-Bold,ItalicFont=NotoSans-Italic,BoldItalicFont=NotoSans-BoldItalic,SmallCapsFont=AlegreyaSansSC-Regular]{NotoSans-Regular}
-\newfontfamily{\latolightfont}[Path=config/fonts/]{Lato-Lig}
+\newfontfamily{\latolightfont}[Path=config/fonts/, ItalicFont=Lato-LightItalic, BoldFont=Lato-Regular, BoldItalicFont=Lato-Italic]{Lato-Lig}
 \newfontfamily{\inconsolatafont}[Path=config/fonts/]{Inconsolata}
 
 % beamer template changes
@@ -64,8 +64,8 @@
   \fi
   \hfill{
     \tikz{
-      \filldraw[fill=colorgreen!30, draw=colorgreen!30]  (0,0) -- (0.2,0) arc (0:{(\value{framenumber})*(360/(\value{totalfr}))}:0.2) -- (0,0);
-      \node at (0,0) {\normalsize \color{colorgreen}\tiny{\insertframenumber}};
+      \filldraw[fill=colorgreen!30, draw=colorgreen!50]  (0,0) -- (0.2,0) arc (0:{(\value{framenumber})*(360/(\value{totalfr}))}:0.2) -- (0,0);
+      \node at (0,0) {\normalsize \color{colorhgray!85}\tiny{\insertframenumber}};
     }
   }
   \hspace{2em}

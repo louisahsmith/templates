@@ -31,6 +31,11 @@
 \usepackage[labelformat=simple]{subcaption}
 \renewcommand\thesubfigure{(\alph{subfigure})}
 
+\usepackage[framemethod=TikZ]{mdframed}
+
+\mdfdefinestyle{statement}{backgroundcolor = colorgreen!30, fontcolor = colorhgray!75, roundcorner=5pt, font = \montserratfont, hidealllines = true}
+
+
 \newif\ifbibliography
 % \usepackage{natbib}
 % \bibliographystyle{$if(biblio-style)$$biblio-style$$else$plainnat$endif$}
@@ -135,7 +140,7 @@ $endfor$
 
 \usepackage{etoolbox}
 \makeatletter
-\patchcmd{\@listI}{\itemsep3\p@}{\itemsep3em}{}{}
+\patchcmd{\@listI}{\itemsep3\p@}{\itemsep1em}{}{}
 \makeatother
 
 \newcommand{\E}{{\operatorname E}}

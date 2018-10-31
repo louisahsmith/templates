@@ -114,6 +114,12 @@
             <text variable="number-of-pages" prefix=": 1-"/>
           </group>
         </if>
+        <else-if type="book" match="any">
+          <group delimiter=": " suffix="." prefix=" ">
+            <text variable="city"/>
+            <text macro="publisher"/>
+          </group>
+        </else-if>
         <else-if type="chapter paper-conference" match="any">
           <group suffix=". ">
             <text term="in" suffix=": " text-case="capitalize-first"/>
@@ -151,4 +157,3 @@
     </layout>
   </bibliography>
 </style>
-
