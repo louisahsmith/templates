@@ -2,5 +2,6 @@
 
 export(epidemiology)
 export(homework)
+export(nih)
 export(notes)
 export(slides)

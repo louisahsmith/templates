@@ -1,7 +1,9 @@
 \documentclass[11pt]{scrartcl}
+\usepackage[nodisplayskipstretch]{setspace}
 $if(linestretch)$
-\usepackage{setspace}
 \setstretch{$linestretch$}
+$else$
+\setstretch{1.667}
 $endif$
 \usepackage{ifxetex,ifluatex}
 \usepackage{fixltx2e} % provides \textsubscript
@@ -81,7 +83,7 @@ $endif$
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 
 $if(numbersections)$
-\setcounter{secnumdepth}{2}
+\setcounter{secnumdepth}{$numbersections$}
 $else$
 \setcounter{secnumdepth}{0}
 $endif$
@@ -103,15 +105,14 @@ $endif$
 \let\rmarkdownfootnote\footnote%
 \def\footnote{\protect\rmarkdownfootnote}
 
-$for(header-includes)$
-$header-includes$
-$endfor$
 
 % \setlength{\parskip}{1.5em}
 \usepackage [autostyle, english = american]{csquotes}
 \MakeOuterQuote{"}
 \renewcommand{\thesection}{\arabic{section}}
-\renewcommand{\thesubsection}{\alph{subsection}}
+\renewcommand{\thesubsection}{\arabic{section}. \alph{subsection}}
+\renewcommand{\thesubsubsection}{\arabic{section}. \alph{subsection}. \roman{subsubsection}}
+
 \usepackage[table]{xcolor}
 \usepackage{textcomp}
 \usepackage{booktabs}
@@ -150,7 +151,7 @@ $endfor$
 \tikzstyle{observed} = [circle, thick, text centered, draw, minimum height=1in, minimum width=1in, text width=9em, text height = 16pt]
 \tikzstyle{end_text} = [thick, text centered]
 \usepackage{relsize}
-\usepackage{setspace}\doublespacing
+
 \allowdisplaybreaks
 \usepackage[all]{nowidow}
 % \renewenvironment{Shaded}{\begin{singlespace}}{\end{singlespace}}
@@ -165,7 +166,6 @@ $endfor$
 \usetikzlibrary{positioning}
 \usetikzlibrary{shapes}
 \usetikzlibrary{arrows.meta}
-\renewcommand\thesubfigure{(\alph{subfigure})}
 \makeatletter
 \renewcommand*\env@matrix[1][\arraystretch]{%
   \edef\arraystretch{#1}%
@@ -212,12 +212,18 @@ $endfor$
 
 \newcommand*{\TitleFont}{%
       % \usefont{\encodingdefault}{\rmdefault}{b}{n}%
-      \fontsize{14}{12}%
+      \fontsize{16}{12}%
       \selectfont}
 \newcommand*{\AuthFont}{%
       % \usefont{\encodingdefault}{\rmdefault}{}{n}%
-      \fontsize{12}{12}%
+      \fontsize{14}{12}%
       \selectfont}
+
+
+$for(header-includes)$
+$header-includes$
+$endfor$
+
 
 $if(dir)$
 \ifxetex
@@ -237,10 +243,22 @@ $if(dir)$
 \fi
 $endif$
 
+$if(parindent)$
+\setlength{\parindent}{parindent}
+$else$
 \setlength{\parindent}{5mm}
+$endif$
+
+$if(parskip)$
+\setlength{\parskip}{$parskip$}
+$else$
 \setlength{\parskip}{2.5mm}
+$endif$
 
 \usepackage{indentfirst}
+
+% \renewcommand\thesubfigure{(\alph{subfigure})}
+
 
 \begin{document}
 

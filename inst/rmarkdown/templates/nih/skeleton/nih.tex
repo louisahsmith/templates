@@ -1,15 +1,18 @@
-\documentclass[11pt$if(landscape)$,landscape$endif$]{scrartcl}
+\documentclass[11pt]{scrartcl}
+
+% \usepackage{palatino} % Palatino font
+\usepackage{helvet} % Helvetica font
+\renewcommand*\familydefault{\sfdefault} % Use the sans serif version of the font
+\usepackage[T1]{fontenc}
 \usepackage[nodisplayskipstretch]{setspace}
 $if(linestretch)$
 \setstretch{$linestretch$}
 $else$
-\setstretch{1.15}
+\setstretch{1.05}
 $endif$
-
-\usepackage{indentfirst}
-
 \usepackage{ifxetex,ifluatex}
 \usepackage{fixltx2e} % provides \textsubscript
+\pagestyle{empty} % Remove page numbers
 
 % use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
@@ -41,10 +44,9 @@ $endif$
 \urlstyle{same}  % don't use monospace font for urls
 $if(natbib)$
 \usepackage{natbib}
-\bibliographystyle{$if(biblio-style)$$biblio-style$$else$plainnat$endif$}
 $endif$
 $if(biblatex)$
-\usepackage$if(biblio-style)$[style=$biblio-style$]$endif${biblatex}
+\usepackage{biblatex}
 $if(biblatexoptions)$\ExecuteBibliographyOptions{$for(biblatexoptions)$$biblatexoptions$$sep$,$endfor$}$endif$
 $for(bibliography)$
 \addbibresource{$bibliography$}
@@ -62,7 +64,7 @@ $if(verbatim-in-note)$
 \VerbatimFootnotes % allows verbatim text in footnotes
 $endif$
 
-$if(graphics)$
+
 \usepackage{graphicx,grffile}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
@@ -72,7 +74,7 @@ $if(graphics)$
 % margins by default, and it is still possible to overwrite the defaults
 % using explicit options in \includegraphics[width, height, ...]{}
 \setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
-$endif$
+
 $if(links-as-notes)$
 % Make links footnotes instead of hotlinks:
 \renewcommand{\href}[2]{#2\footnote{\url{#1}}}
@@ -87,9 +89,9 @@ $endif$
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 
 $if(numbersections)$
-\setcounter{secnumdepth}{5}
+\setcounter{secnumdepth}{$numbersections$}
 $else$
-\setcounter{secnumdepth}{0}
+\setcounter{secnumdepth}{3}
 $endif$
 $if(subparagraph)$
 $else$
@@ -105,31 +107,25 @@ $else$
 $endif$
 
 
-\setlength{\parindent}{0mm}
-\setlength{\parskip}{6mm}
-
-\linespread{1.15}
-
 %%% Use protect on footnotes to avoid problems with footnotes in titles
 \let\rmarkdownfootnote\footnote%
 \def\footnote{\protect\rmarkdownfootnote}
 
-$for(header-includes)$
-$header-includes$
-$endfor$
 
 % \setlength{\parskip}{1.5em}
 \usepackage [autostyle, english = american]{csquotes}
 \MakeOuterQuote{"}
-\renewcommand{\thesection}{\Roman{section}}
-\renewcommand{\thesubsection}{\alph{subsection}}
+% \renewcommand{\thesection}{}
+\renewcommand*{\sectionformat}{}
+\renewcommand{\thesubsection}{\Alph{subsection}}
+\renewcommand{\thesubsubsection}{\Alph{subsection}.\arabic{subsubsection}}
+
 \usepackage[table]{xcolor}
 \usepackage{textcomp}
 \usepackage{booktabs}
-\usepackage[margin=$if(margin)$$margin$$else$1in$endif$, footskip=$if(footskip)$$footskip$$else$.5in$endif$]{geometry}
+\usepackage[margin=$if(margin)$$margin$$else$.5in$endif$, footskip=$if(footskip)$$footskip$$else$.5in$endif$]{geometry}
 \usepackage{float}
 \usepackage{lipsum}
-\usepackage{graphicx}
 \usepackage{wrapfig}
 % \usepackage{underscore}
 \usepackage{enumitem}
@@ -153,9 +149,6 @@ $endfor$
 \usepackage{pdflscape}
 \usepackage[labelfont=bf]{caption}
 \usepackage{ragged2e}
-
-\allowdisplaybreaks
-\usepackage[all]{nowidow}
 % \usepackage{color, colortbl}
 \usepackage{pgf,tikz}
 \usetikzlibrary{positioning, calc, shapes.geometric, shapes.multipart,
@@ -164,16 +157,21 @@ $endfor$
 \usepackage{tkz-tab}
 \tikzstyle{observed} = [circle, thick, text centered, draw, minimum height=1in, minimum width=1in, text width=9em, text height = 16pt]
 \tikzstyle{end_text} = [thick, text centered]
+\usepackage{relsize}
+
+\allowdisplaybreaks
+\usepackage[all]{nowidow}
+% \renewenvironment{Shaded}{\begin{singlespace}}{\end{singlespace}}
 
 \setkomafont{title}{\normalfont\upshape\bfseries}
 \setkomafont{section}{\normalfont\large\upshape\bfseries}
-\setkomafont{subsection}{\normalfont\upshape\bfseries}
+\setkomafont{subsection}{\normalfont\large\upshape\bfseries}
+\setkomafont{subsubsection}{\normalfont\upshape\bfseries}
 % \setlength{\parskip}{0.1mm}
 \setlist[enumerate]{leftmargin=*}
 \usetikzlibrary{positioning}
 \usetikzlibrary{shapes}
 \usetikzlibrary{arrows.meta}
-\renewcommand\thesubfigure{(\alph{subfigure})}
 \makeatletter
 \renewcommand*\env@matrix[1][\arraystretch]{%
   \edef\arraystretch{#1}%
@@ -182,10 +180,13 @@ $endfor$
   \array{*\c@MaxMatrixCols c}}
 \makeatother
 
+\newcommand*{\secref}[1]{Section~\ref{#1}}
+
+\renewcommand\paragraph{\newpage}
+
 \newcommand*\xtb{\mathbf{X}_i^T\bm{\beta}}
 
 \newcommand*{\independent}{\!\perp\!\!\!\perp}
-
 \newcommand*{\notindep}{\not\!\perp\!\!\!\perp}
 
 \newcommand{\E}{{\operatorname E}}
@@ -193,30 +194,42 @@ $endfor$
 \newcommand{\Cov}{{\operatorname {Cov}}}
 \newcommand{\Cor}{{\operatorname {Cor}}}
 
+\newcommand*\pr{\text{P}}
 
+\newcommand*\RRts{\text{RR}^{\text{true}}_{AY |(S = 1)}}
+\newcommand*\RRos{\text{RR}^{\text{obs}}_{AY}}
 
-\newcommand*\pr{\text{Pr}}
+\newcommand*\RRt{\text{RR}^{\text{true}}_{AY}}
+\newcommand*\RRo{\text{RR}^{\text{obs}}_{AY}}
+
+\newcommand*\RDts{\text{RD}^{\text{true}}_{AY |(S = 1)}}
+\newcommand*\RDos{\text{RD}^{\text{obs}}_{AY}}
+
+\newcommand*\RDt{\text{RD}^{\text{true}}_{AY}}
+\newcommand*\RDo{\text{RD}^{\text{obs}}_{AY}}
+
+\newcommand*\RRuyaa{\text{RR}_{UY |(A = 0)}}
+\newcommand*\RRuyab{\text{RR}_{UY |(A = 1)}}
+\newcommand*\RRsuaa{\text{RR}_{SU |(A = 0)}}
+\newcommand*\RRsuab{\text{RR}_{SU |(A = 1)}}
+
+\newcommand*\RRuys{\text{RR}_{UY |(S = 1)}}
+\newcommand*\RRaus{\text{RR}_{AU |(S = 1)}}
 
 \newcommand*{\TitleFont}{%
       % \usefont{\encodingdefault}{\rmdefault}{b}{n}%
-      \fontsize{14}{12}%
+      \fontsize{16}{12}%
       \selectfont}
 \newcommand*{\AuthFont}{%
       % \usefont{\encodingdefault}{\rmdefault}{}{n}%
-      \fontsize{12}{12}%
+      \fontsize{14}{12}%
       \selectfont}
 
-$if(parindent)$
-\setlength{\parindent}{parindent}
-$else$
-\setlength{\parindent}{5mm}
-$endif$
 
-$if(parskip)$
-\setlength{\parskip}{$parskip$}
-$else$
-\setlength{\parskip}{2.5mm}
-$endif$
+$for(header-includes)$
+$header-includes$
+$endfor$
+
 
 $if(dir)$
 \ifxetex
@@ -236,27 +249,24 @@ $if(dir)$
 \fi
 $endif$
 
-\begin{document}
-
-{\centering
-  $if(title)$
-  \title{\vspace{-4ex} \TitleFont{$title$}}
-  $endif$
-  $if(class)$
-  \subtitle{$class$\vspace{-2ex}}
-  $endif$
-  $if(date)$
-  \date{\vspace{-1.5ex} \AuthFont{$date$}\vspace{-4ex}}
-  $endif$
-  \author{\AuthFont{$name$}\vspace{-1.5ex}}
-  \maketitle
-}
-
-$if(abstract)$
-\begin{abstract}
-$abstract$
-\end{abstract}
+$if(parindent)$
+\setlength{\parindent}{parindent}
+$else$
+\setlength{\parindent}{5mm}
 $endif$
+
+$if(parskip)$
+\setlength{\parskip}{$parskip$}
+$else$
+\setlength{\parskip}{0mm}
+$endif$
+
+\usepackage{indentfirst}
+
+% \renewcommand\thesubfigure{(\alph{subfigure})}
+
+
+\begin{document}
 
 $for(include-before)$
 $include-before$
@@ -270,6 +280,7 @@ $endif$
 \setcounter{tocdepth}{$toc-depth$}
 \tableofcontents
 }
+\newpage
 $endif$
 $if(lot)$
 \listoftables
