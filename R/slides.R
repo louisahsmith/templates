@@ -12,7 +12,7 @@ slides <- function(..., metadata = NULL) {
                              format = "slides",
                              template = "slides.tex",
                              metadata = metadata,
-                             latex_engine = "lualatex",
+                             latex_engine = "xelatex",
                              citation_package = "biblatex")
 
   # if(!type %in% c("pdf")) stop("Other formats not yet supported")

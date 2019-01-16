@@ -7,6 +7,12 @@
 
 \input{config/presento.sty}
 
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+% \setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\setkeys{Gin}{keepaspectratio}
+
 \usepackage{textpos}
 \setlength{\TPHorizModule}{1cm}
 \setlength{\TPVertModule}{1cm}
@@ -33,8 +39,21 @@
 
 \usepackage[framemethod=TikZ]{mdframed}
 
-\mdfdefinestyle{statement}{backgroundcolor = colorgreen!30, fontcolor = colorhgray!75, roundcorner=5pt, font = \montserratfont, hidealllines = true}
+\mdfdefinestyle{statement}{backgroundcolor = colorgreen!30, fontcolor = colorhgray!75, roundcorner=5pt, font = \montserratfont\raggedright, hidealllines = true}
 
+
+\usepackage{etoolbox}
+
+\usepackage{media9}
+
+\AtBeginDocument{%
+  \letcs\oig{@orig\string\includegraphics}%
+  \renewcommand<>\includegraphics[2][]{%
+    \only#3{%
+      {\centering\oig[{#1}]{#2}\par}%
+    }%
+  }%
+}
 
 \newif\ifbibliography
 % \usepackage{natbib}
@@ -124,6 +143,10 @@ $endfor$
 
 %\captionsetup{textfont=colordgray,labelfont=colororange}
 \setbeamertemplate{frametitle continuation}{}
+
+$if(highlighting-macros)$
+$highlighting-macros$
+$endif$
 
 \renewenvironment{block}
     {\bfseries}
@@ -225,7 +248,8 @@ $body$
 % \end{frame}
 % $endif$
 
-
+$if(nobib)$
+$else$
 \begin{frame}[plain,allowframebreaks]{$if(biblio-title)$$biblio-title$$else$References$endif$}
 \bibliographytrue
 \printbibliography[heading=none]
@@ -235,7 +259,7 @@ $for(bibpages)$
 $sep$
 $endfor$
 \end{frame}
-
+$endif$
 
 % $if(references)$
 % \begin{frame}[plain, allowframebreaks]{References}
