@@ -118,7 +118,7 @@ $endfor$
 \MakeOuterQuote{"}
 \renewcommand{\thesection}{\Roman{section}}
 \renewcommand{\thesubsection}{\alph{subsection}}
-\usepackage[table]{xcolor}
+\usepackage{xcolor}
 \usepackage{textcomp}
 \usepackage{booktabs}
 \usepackage[margin=1in, footskip=.5in]{geometry}
@@ -173,15 +173,15 @@ $endfor$
 
 
 \setlist[itemize]{leftmargin=*}
-
-\renewcommand\thesubfigure{(\alph{subfigure})}
-\makeatletter
-\renewcommand*\env@matrix[1][\arraystretch]{%
-  \edef\arraystretch{#1}%
-  \hskip -\arraycolsep
-  \let\@ifnextchar\new@ifnextchar
-  \array{*\c@MaxMatrixCols c}}
-\makeatother
+%
+% \renewcommand\thesubfigure{(\alph{subfigure})}
+% \makeatletter
+% \renewcommand*\env@matrix[1][\arraystretch]{%
+%   \edef\arraystretch{#1}%
+%   \hskip -\arraycolsep
+%   \let\@ifnextchar\new@ifnextchar
+%   \array{*\c@MaxMatrixCols c}}
+% \makeatother
 
 \newcommand*\xtb{\mathbf{X}_i^T\bm{\beta}}
 

@@ -4,7 +4,7 @@
 #' @param metadata Extra yaml metadata to include. Defaults to NULL.
 #' @param type Either "pdf" or "word". Defaults to "pdf".
 #' @keywords template
-#' @export
+#' @export epidemiology
 #' @examples
 #' rmarkdown::render("doc.Rmd", epidemiology())
 
@@ -15,7 +15,7 @@ epidemiology <- function(..., metadata = NULL, type = "pdf") {
                         template = "epidemiology.tex",
                         metadata = metadata,
                         bibstyle = "epidemiology",
-                      bibliography = "library_fixed"))
+                      bibliography = "library"))
   }
   if(type == "word"){
     return(word_document_format(...,

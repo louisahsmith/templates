@@ -1,6 +1,6 @@
 ---
-title: "Manuscript"
+title: "Grant"
 output:
-  templates::epidemiology:
+  templates::nih:
     type: pdf
 ---

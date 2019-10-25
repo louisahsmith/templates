@@ -143,13 +143,10 @@ $endif$
 \usepackage[labelfont=bf]{caption}
 \usepackage{ragged2e}
 % \usepackage{color, colortbl}
-\usepackage{pgf,tikz}
 \usetikzlibrary{positioning, calc, shapes.geometric, shapes.multipart,
   shapes, arrows.meta, arrows,
   decorations.markings, external, trees}
 \usepackage{tkz-tab}
-\tikzstyle{observed} = [circle, thick, text centered, draw, minimum height=1in, minimum width=1in, text width=9em, text height = 16pt]
-\tikzstyle{end_text} = [thick, text centered]
 \usepackage{relsize}
 
 \allowdisplaybreaks
@@ -213,12 +210,15 @@ $endif$
 \newcommand*{\TitleFont}{%
       % \usefont{\encodingdefault}{\rmdefault}{b}{n}%
       \fontsize{16}{12}%
-      \selectfont}
+      \selectfont
+      \centering}
 \newcommand*{\AuthFont}{%
       % \usefont{\encodingdefault}{\rmdefault}{}{n}%
       \fontsize{14}{12}%
-      \selectfont}
+      \selectfont
+      \centering}
 
+\usepackage{widebar}
 
 $for(header-includes)$
 $header-includes$
@@ -262,17 +262,23 @@ $endif$
 
 \begin{document}
 
-{\centering
-  $if(title)$
-  \vspace{-4ex} \TitleFont{$title$}
-  $endif$
-}
+\begin{center}
+$if(title)$
+  \vspace{-4ex}
+  \TitleFont{
+  $title$
+  }
+$endif$
 
-{\centering
-  $if(name)$
-  \AuthFont{$name$}\vspace{-.5ex}
-  $endif$
-}
+
+$if(name)$
+  \AuthFont{
+  $name$
+  }
+  \vspace{-.5ex}
+$endif$
+
+\end{center}
 
 $if(abstract)$
 \begin{abstract}
@@ -292,8 +298,11 @@ $if(colorlinks)$
 $endif$
 \setcounter{tocdepth}{$toc-depth$}
 \tableofcontents
+\addtocontents{toc}{\protect\thispagestyle{empty}}
+\setcounter{page}{0}
 }
 \newpage
+
 $endif$
 $if(lot)$
 \listoftables
